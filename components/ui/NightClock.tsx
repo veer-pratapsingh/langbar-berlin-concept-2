@@ -14,16 +14,34 @@ export function NightClock() {
   useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 160);
-      const scrollPos = window.scrollY + window.innerHeight * 0.38;
-      for (let i = milestones.length - 1; i >= 0; i--) {
+
+      // Safeguard for very bottom of page (Last Call)
+      const isNearBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 80;
+
+      if (isNearBottom) {
+        setActiveIndex(milestones.length - 1);
+        return;
+      }
+
+      // Check each section relative to the viewport trigger line (top 42%)
+      const triggerY = window.innerHeight * 0.42;
+      let currentIndex = 0;
+
+      for (let i = 0; i < milestones.length; i++) {
         const item = milestones[i];
         if (!item) continue;
         const el = document.getElementById(item.sectionId);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveIndex(i);
-          break;
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= triggerY) {
+            currentIndex = i;
+          }
         }
       }
+
+      setActiveIndex(currentIndex);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
