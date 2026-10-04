@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0806;
+  --color-charcoal: #15110e;
+  --color-velvet: #4a1220;
+  --color-brass: #c9a45c;
+  --color-champagne: #e8cf9a;
+  --color-ivory: #f3ead8;
+  --color-smoke: rgba(243, 234, 216, 0.62);
+  --color-gold-muted: rgba(201, 164, 92, 0.35);
+
+  --font-serif: var(--font-cormorant), "Times New Roman", Times, serif;
+  --font-sans: var(--font-jost), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  /* Night-time lighting variables dynamically tweened by ScrollTrigger */
+  --bg-tone: #0a0806;
+  --bg-subtle: #120e0b;
+  --glow-color: rgba(201, 164, 92, 0.14);
+  --glow-highlight: rgba(232, 207, 154, 0.08);
+
+  /* Candlight coordinates for hero interactive glow */
+  --candle-x: 50%;
+  --candle-y: 45%;
+  --candle-radius: 420px;
+  --candle-intensity: 1;
+
+  /* Global scroll progress */
+  --scroll-progress: 0%;
+}
+
+html {
+  background-color: var(--bg-tone);
+  color: #f3ead8;
+  font-family: var(--font-jost), -apple-system, BlinkMacSystemFont, sans-serif;
+  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-tone);
+  color: #f3ead8;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0806;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a221a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a45c;
+}
+
+/* Film Grain Texture */
+.film-grain {
+  position: fixed;
+  inset: -100%;
+  width: 300%;
+  height: 300%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+  animation: grainJitter 6s steps(8) infinite;
+}
+
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .film-grain {
+    animation: none;
+    opacity: 0.025;
+  }
+}
+
+@keyframes grainJitter {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  20% { transform: translate(3%, 1%); }
+  30% { transform: translate(-1%, 3%); }
+  40% { transform: translate(2%, -2%); }
+  50% { transform: translate(-3%, 2%); }
+  60% { transform: translate(1%, -1%); }
+  70% { transform: translate(-2%, 1%); }
+  80% { transform: translate(3%, -3%); }
+  90% { transform: translate(-1%, 2%); }
+}
+
+/* Subtle Vignette */
+.screen-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(circle at center, transparent 55%, rgba(10, 8, 6, 0.45) 100%);
+}
+
+/* Editorial Typography */
+.font-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+.font-sans {
+  font-family: var(--font-jost), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Art Deco Arch Mask Utility */
+.arch-mask {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+}
+
+/* Stepped Corner Brackets */
+.deco-corner-bracket {
+  position: relative;
+}
+.deco-corner-bracket::before,
+.deco-corner-bracket::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #c9a45c;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.deco-corner-bracket::before {
+  top: 0;
+  left: 0;
+  border-top: 1px solid #c9a45c;
+  border-left: 1px solid #c9a45c;
+}
+.deco-corner-bracket::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid #c9a45c;
+  border-right: 1px solid #c9a45c;
+}
+
+/* Gold Hairlines */
+.gold-hairline {
+  border-color: rgba(201, 164, 92, 0.22);
+}
+.gold-hairline-bright {
+  border-color: rgba(201, 164, 92, 0.55);
+}
+
+/* Liquid fill sweep button */
+.btn-liquid {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+  z-index: 1;
+}
+.btn-liquid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #c9a45c;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: -1;
+}
+.btn-liquid:hover::before {
+  transform: translateY(0%);
+}
+
+/* Secondary rolling label button */
+.btn-roll {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+}
+.btn-roll .roll-inner {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.btn-roll:hover .roll-inner {
+  transform: translateY(-50%);
+}
+
+/* Focus styles for keyboard accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #e8cf9a !important;
+  outline-offset: 3px !important;
+}
+
+/* Glow ambiance utility */
+.ambient-glow {
+  background: radial-gradient(circle at 50% 50%, var(--glow-color) 0%, transparent 70%);
+}

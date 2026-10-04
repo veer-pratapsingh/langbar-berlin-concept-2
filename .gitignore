@@ -1,0 +1,23 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+*.tsbuildinfo
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.vercel
+.env*
+
+# Original full-resolution Instagram exports (~60 MB). The curated, web-sized
+# copies live in /public/images and are what gets deployed. Keep the originals
+# locally if you want to re-run `npm run images`.
+/Langbar_Berlin_Images/
+
+.vercel
