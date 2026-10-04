@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "./Button";
 
@@ -84,13 +85,22 @@ export function ReservationDrawer({ isOpen, onClose }: ReservationDrawerProps) {
             {/* Header */}
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-[#c9a45c]/20">
-                <div>
-                  <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-[#c9a45c]">
-                    Table Reservation
-                  </span>
-                  <h2 id="drawer-title" className="font-serif text-3xl text-[#f3ead8] font-light mt-1">
-                    An Evening at Lang Bar
-                  </h2>
+                <div className="flex items-center gap-3.5">
+                  <Image
+                    src="/images/langbar-logo-128.png"
+                    alt="Lang Bar Berlin Logo"
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(201,164,92,0.35)]"
+                  />
+                  <div>
+                    <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-[#c9a45c]">
+                      Table Reservation
+                    </span>
+                    <h2 id="drawer-title" className="font-serif text-2xl sm:text-3xl text-[#f3ead8] font-light mt-0.5">
+                      An Evening at Lang Bar
+                    </h2>
+                  </div>
                 </div>
                 <button
                   onClick={handleClose}

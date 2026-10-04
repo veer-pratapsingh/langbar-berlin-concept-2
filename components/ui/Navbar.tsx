@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { useSmoothScroll } from "@/components/motion/SmoothScrollProvider";
 import { Button } from "./Button";
 import { ReservationDrawer } from "./ReservationDrawer";
@@ -73,15 +74,25 @@ export function Navbar() {
                 e.preventDefault();
                 scrollTo("#hero");
               }}
-              className="group flex flex-col focus:outline-none"
+              className="group flex items-center gap-3 sm:gap-3.5 focus:outline-none"
               aria-label="Lang Bar Berlin Home"
             >
-              <span className="font-serif text-xl sm:text-2xl tracking-[0.24em] uppercase font-light text-[#f3ead8] group-hover:text-[#e8cf9a] transition-colors">
-                Lang Bar
-              </span>
-              <span className="font-sans text-[8px] uppercase tracking-[0.32em] text-[#c9a45c]/70 group-hover:text-[#c9a45c] transition-colors">
-                Berlin
-              </span>
+              <Image
+                src="/images/langbar-logo-128.png"
+                alt="Lang Bar Berlin Official Logo"
+                width={36}
+                height={36}
+                className="w-8 h-8 sm:w-9 sm:h-9 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(201,164,92,0.35)]"
+                priority
+              />
+              <div className="flex flex-col">
+                <span className="font-serif text-xl sm:text-2xl tracking-[0.22em] uppercase font-light text-[#f3ead8] group-hover:text-[#e8cf9a] transition-colors leading-none">
+                  Lang Bar
+                </span>
+                <span className="font-sans text-[8px] uppercase tracking-[0.32em] text-[#c9a45c]/70 group-hover:text-[#c9a45c] transition-colors mt-1">
+                  Berlin
+                </span>
+              </div>
             </a>
 
             {/* Concept Preview Tag */}

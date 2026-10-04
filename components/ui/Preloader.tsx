@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 
 interface PreloaderProps {
@@ -9,6 +10,7 @@ interface PreloaderProps {
 
 export function Preloader({ onComplete }: PreloaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const sublineRef = useRef<HTMLDivElement>(null);
@@ -28,10 +30,12 @@ export function Preloader({ onComplete }: PreloaderProps) {
     }
 
     // Pre-decode hero image so it's instantly crisp when curtains open
-    const heroImg = new Image();
-    heroImg.src = "/images/hero-bar-arrival.jpg";
-    if ("decode" in heroImg) {
-      heroImg.decode().catch(() => {});
+    if (typeof window !== "undefined") {
+      const heroImg = new window.Image();
+      heroImg.src = "/images/hero-bar-arrival.jpg";
+      if ("decode" in heroImg) {
+        heroImg.decode().catch(() => {});
+      }
     }
 
     const containerEl = containerRef.current;
@@ -47,6 +51,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
       // 1. Initial states
       gsap.set(lineRef.current, { scaleX: 0, transformOrigin: "center center" });
+      gsap.set(logoRef.current, { opacity: 0, scale: 0.85, y: 15 });
       gsap.set(textRef.current, { opacity: 0, letterSpacing: "0.55em", y: 15 });
       gsap.set(sublineRef.current, { opacity: 0, y: 10 });
 
@@ -56,6 +61,19 @@ export function Preloader({ onComplete }: PreloaderProps) {
         duration: 0.65,
         ease: "power3.inOut",
       });
+
+      // 2.5. Official logo crest reveals
+      tl.to(
+        logoRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+        },
+        "-=0.3"
+      );
 
       // 3. "LANG BAR" fades up with tightening letter-spacing
       tl.to(
@@ -67,7 +85,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
           duration: 0.8,
           ease: "power2.out",
         },
-        "-=0.2"
+        "-=0.4"
       );
 
       // Subline reveals softly
@@ -85,9 +103,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
       // 4. Brief pause for elegance (total time stays under 2.2s)
       tl.to({}, { duration: 0.25 });
 
-      // 5. Fade out text & line
+      // 5. Fade out text, logo & line
       tl.to(
-        [textRef.current, sublineRef.current, lineRef.current],
+        [logoRef.current, textRef.current, sublineRef.current, lineRef.current],
         {
           opacity: 0,
           duration: 0.35,
@@ -142,13 +160,16 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
       {/* Center Content Stage */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6">
-        {/* Monogram or Stepped Art Deco Icon */}
-        <div className="mb-6 opacity-80">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="0.5" y="0.5" width="31" height="31" stroke="#c9a45c" strokeWidth="0.75" />
-            <path d="M4 4L8 8M28 4L24 8M4 28L8 24M28 28L24 24" stroke="#c9a45c" strokeWidth="0.5" />
-            <circle cx="16" cy="16" r="3" fill="#e8cf9a" />
-          </svg>
+        {/* Official Brand Logo Crest */}
+        <div ref={logoRef} className="mb-5 drop-shadow-[0_0_20px_rgba(201,164,92,0.45)]">
+          <Image
+            src="/images/langbar-logo-512.png"
+            alt="Lang Bar Berlin Official Crest"
+            width={72}
+            height={72}
+            className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+            priority
+          />
         </div>
 
         {/* Brand Wordmark */}

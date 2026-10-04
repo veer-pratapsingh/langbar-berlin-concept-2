@@ -9,6 +9,7 @@ export interface DJEvent {
 
 export const SITE_CONFIG = {
   name: "Lang Bar Berlin",
+  logo: "/images/langbar-logo.png",
   location: "Waldorf Astoria Berlin, 1st Floor",
   address: "Hardenbergstraße 28, 10623 Berlin, Germany",
   googleMapsUrl: "https://maps.google.com/?q=Waldorf+Astoria+Berlin+Hardenbergstra%C3%9Fe+28+10623+Berlin",

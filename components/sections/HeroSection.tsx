@@ -264,7 +264,14 @@ export function HeroSection({ onReserveClick, isReady = true }: HeroSectionProps
       <div className="relative z-10 w-full px-6 sm:px-10 lg:px-14 xl:px-20 my-auto py-6 sm:py-12">
         <div className="max-w-4xl xl:max-w-5xl 2xl:max-w-6xl">
           {/* Milestone Tag */}
-          <div className="flex items-center gap-3 mb-4 sm:mb-6">
+          <div className="flex items-center gap-3.5 mb-4 sm:mb-6">
+            <Image
+              src="/images/langbar-logo-128.png"
+              alt="Lang Bar Berlin Crest"
+              width={28}
+              height={28}
+              className="w-6 h-6 sm:w-7 sm:h-7 object-contain opacity-90 drop-shadow-[0_0_8px_rgba(201,164,92,0.4)]"
+            />
             <span className="font-mono text-[11px] sm:text-xs text-[#c9a45c] tracking-widest uppercase">
               19:00 · Arrival
             </span>

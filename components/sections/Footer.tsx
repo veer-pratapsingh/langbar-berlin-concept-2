@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { SITE_CONFIG } from "@/data/site";
 import { useSmoothScroll } from "@/components/motion/SmoothScrollProvider";
@@ -100,6 +101,17 @@ export function Footer() {
 
         {/* GIANT LETTER-BY-LETTER STAGGERED WORDMARK */}
         <div ref={wordmarkRef} className="py-14 sm:py-20 text-center">
+          {/* Official Crest Logo */}
+          <div className="flex justify-center mb-6">
+            <Image
+              src="/images/langbar-logo-512.png"
+              alt="Lang Bar Berlin Official Logo Crest"
+              width={80}
+              height={80}
+              className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-[0_0_20px_rgba(201,164,92,0.4)] hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="w-8 h-[1px] bg-[#c9a45c]/40" />
             <span className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.35em] text-[#c9a45c]">

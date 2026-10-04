@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { SITE_CONFIG } from "@/data/site";
 import { useSmoothScroll } from "@/components/motion/SmoothScrollProvider";
 
@@ -58,9 +59,15 @@ export function NightClock() {
         aria-label="Night storytelling timeline"
         className="hidden xl:flex fixed right-5 top-1/2 -translate-y-1/2 z-40 flex-col items-center pointer-events-auto select-none"
       >
-        {/* Subtle Category Tag */}
-        <div className="flex flex-col items-center mb-3 opacity-60 hover:opacity-100 transition-opacity">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#c9a45c] animate-pulse mb-1" />
+        {/* Subtle Category Tag with Official Crest */}
+        <div className="flex flex-col items-center mb-3 opacity-75 hover:opacity-100 transition-opacity">
+          <Image
+            src="/images/langbar-logo-64.png"
+            alt="Lang Bar Crest"
+            width={18}
+            height={18}
+            className="w-4 h-4 object-contain mb-1.5 drop-shadow-[0_0_6px_rgba(201,164,92,0.4)]"
+          />
           <span className="font-sans text-[8px] uppercase tracking-[0.25em] text-[#e8cf9a] [writing-mode:vertical-rl] rotate-180">
             Timeline
           </span>
